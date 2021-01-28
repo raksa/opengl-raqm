@@ -17,5 +17,4 @@ find_library(RAQM_LIBRARY
 )
 target_link_libraries(main PUBLIC ${RAQM_LIBRARY})
 
-# silence warning messages
 set(CMAKE_CXX_FLAGS "-w -framework glut -framework opengl")
