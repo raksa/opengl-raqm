@@ -2,24 +2,17 @@
 
 #include "main_opengl_utils.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char** argv)
 {
-
-  //a basic set up...
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-  glutInitWindowSize(640, 480);
-
-  //create the window, the argument is the title
-  glutCreateWindow("GLUT program");
-
-  //pass the callbacks
-  glutDisplayFunc(display);
-  glutReshapeFunc(reshape);
-  glutIdleFunc(idle);
-
-  glutMainLoop();
-
-  //we never get here because glutMainLoop() is an infinite loop
-  return 0;
+   glutInit(&argc, argv);
+   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+   glutInitWindowSize(300, 100);
+   glutInitWindowPosition (100, 100);
+   glutCreateWindow(argv[0]);
+   init();
+   glutReshapeFunc(reshape);
+   glutKeyboardFunc(keyboard);
+   glutDisplayFunc(display);
+   glutMainLoop();
+   return 0;
 }
