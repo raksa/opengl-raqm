@@ -1,3 +1,6 @@
 #!/bin/sh
 
-cmake CMakeLists.txt && make && ./main ../Battambang-Regular.ttf "សោះស្តី" "l" "km"
+# raw compile
+clang++ -w -framework glut -framework opengl src/main_opengl.cpp -o main_opengl
+
+# cmake CMakeLists.txt && make && ./main ../Battambang-Regular.ttf "សោះស្តី" "l" "km"
