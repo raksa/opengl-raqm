@@ -1,7 +1,6 @@
 #include <iostream>
 
-extern "C"
-{
+extern "C" {
 #include "utils.h"
 }
 
