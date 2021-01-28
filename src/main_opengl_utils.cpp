@@ -2,6 +2,11 @@
 #include <string.h>
 #include <GLUT/glut.h>
 
+char *fontfile = "./assets/fonts/Battambang-Regular.ttf";
+char *text = "សោះស្តី";
+char *direction = "L";
+char *language = "km";
+
 GLubyte space[] =
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -78,8 +83,8 @@ void display(void)
   glClear(GL_COLOR_BUFFER_BIT);
   glColor3fv(white);
 
-  glRasterPos2i(20, 60);
-  printString("THE QUICK BROWN FOX JUMPS");
+  glRasterPos2i(40, 120);
+  printString(text);
   glRasterPos2i(20, 40);
   printString("OVER A LAZY DOG");
   glFlush();
