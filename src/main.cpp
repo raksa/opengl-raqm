@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "funs.h"
+#include "utils.h"
 
 int main(int argc, char **argv)
 {

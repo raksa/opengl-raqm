@@ -7,6 +7,7 @@ add_executable(main ${CURRENT_SOURCE_DIR}/main.cpp)
 
 target_sources(main PUBLIC 
     ${CURRENT_SOURCE_DIR}/funs.cpp
+    ${CURRENT_SOURCE_DIR}/utils.cpp
     ${CURRENT_SOURCE_DIR}/render_text.cpp
     ${CURRENT_SOURCE_DIR}/load_shader.cpp
     ${CURRENT_SOURCE_DIR}/raqm_utils.c
