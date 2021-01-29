@@ -3,7 +3,7 @@ project(test VERSION 0.1.0)
 
 set(CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-add_executable(main ${CURRENT_SOURCE_DIR}/main_opengl.cpp)
+add_executable(main ${CURRENT_SOURCE_DIR}/main.cpp)
 
 target_sources(main PUBLIC 
     ${CURRENT_SOURCE_DIR}/main_opengl_utils.cpp

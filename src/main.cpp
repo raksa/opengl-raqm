@@ -1,29 +1,34 @@
-#include <iostream>
+#include <GLUT/glut.h>
+#include <string.h>
 
-extern "C" {
-#include "utils.h"
-}
+#include "main_opengl_utils.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-  const char *fontfile;
-  const char *text;
-  const char *direction;
-  const char *language;
+   int i, msg_submenu, color_submenu;
 
-  if (argc < 5)
-  {
-    std::cout << "Usage: " << argv[0] << " FONT_FILE(./Battambang-Regular.ttf) TEXT(\"សោះស្តី\") DIRECTION(r|l) LANG(km|en)\n";
-    std::cout << "LANG(language code) https://www.w3.org/International/articles/language-tags/";
-    return 1;
-  }
-  fontfile = argv[1];
-  text = argv[2];
-  direction = argv[3];
-  language = argv[4];
-
-  std::string txt = getGlyphs(fontfile, text, direction, language);
-  std::cout << txt << std::endl;
-
-  return 1;
+   glutInit(&argc, argv);
+   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+   glutInitWindowSize(500, 150);
+   glutCreateWindow("GLUT bitmap font example");
+   glClearColor(0.0, 0.0, 0.0, 1.0);
+   glutDisplayFunc(display);
+   glutReshapeFunc(reshape);
+   glutIdleFunc(tick);
+   msg_submenu = glutCreateMenu(selectMessage);
+   glutAddMenuEntry("abc", 1);
+   glutAddMenuEntry("ABC", 2);
+   color_submenu = glutCreateMenu(selectColor);
+   glutAddMenuEntry("Green", 1);
+   glutAddMenuEntry("Red", 2);
+   glutAddMenuEntry("White", 3);
+   glutCreateMenu(selectFont);
+   glutAddMenuEntry("9 by 15", 0);
+   glutAddMenuEntry("Times Roman 10", 1);
+   glutAddMenuEntry("Times Roman 24", 2);
+   glutAddSubMenu("Messages", msg_submenu);
+   glutAddSubMenu("Color", color_submenu);
+   glutAttachMenu(GLUT_RIGHT_BUTTON);
+   glutMainLoop();
+   return 0; /* ANSI C requires main to return int. */
 }
