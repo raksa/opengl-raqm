@@ -13,7 +13,6 @@ int main(int argc, char **argv)
    glutInitWindowSize(700, 500);
    glutCreateWindow("GLUT bitmap font example");
    glClearColor(0.0, 0.0, 0.0, 1.0);
-   glutDisplayFunc(display);
    glutReshapeFunc(reshape);
    glutIdleFunc(tick);
    msg_submenu = glutCreateMenu(selectMessage);
@@ -30,6 +29,12 @@ int main(int argc, char **argv)
    glutAddSubMenu("Messages", msg_submenu);
    glutAddSubMenu("Color", color_submenu);
    glutAttachMenu(GLUT_RIGHT_BUTTON);
-   glutMainLoop();
+   if (init_resources())
+   {
+      glutDisplayFunc(display);
+      glutMainLoop();
+   }
+
+   free_resources();
    return 0; /* ANSI C requires main to return int. */
 }

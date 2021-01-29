@@ -11,76 +11,19 @@ extern "C"
 
 void renderKhmerText()
 {
-    char buf[PATH_MAX];
-    std::string font_file = std::string(getcwd(buf, sizeof(buf))) + "/assets/fonts/Battambang-Regular.ttf";
-    std::string text = "Khmer text សោះស្តី";
-    std::string direction = "r";
-    std::string language = "km";
-
-    FT_Library library = NULL;
-    FT_Face face = NULL;
-
-    if (FT_Init_FreeType(&library) == 0)
+    const char *text = "Khmer សោះស្តី";
+    glRasterPos2f(10, 0);
+    int len = strlen(text);
+    int i;
+    for (i = 0; i < len; i++)
     {
-        if (FT_New_Face(library, font_file.c_str(), 0, &face) == 0)
-        {
-            if (FT_Set_Char_Size(face, face->units_per_EM, 0, 0, 0) == 0)
-            {
-                raqm_t *rq = raqm_create();
-                if (rq != NULL)
-                {
-                    raqm_direction_t dir = RAQM_DIRECTION_DEFAULT;
-
-                    if (direction == "r")
-                        dir = RAQM_DIRECTION_RTL;
-                    else if (direction == "l")
-                        dir = RAQM_DIRECTION_LTR;
-
-                    if (raqm_set_text_utf8(rq, text.c_str(), text.length()) &&
-                        raqm_set_freetype_face(rq, face) &&
-                        raqm_set_par_direction(rq, dir) &&
-                        raqm_set_language(rq, language.c_str(), 0, text.length()) &&
-                        raqm_layout(rq))
-                    {
-                        size_t count, i;
-                        raqm_glyph_t *glyphs = raqm_get_glyphs(rq, &count);
-
-                        glRasterPos2f(10, 0);
-                        int len = text.length();
-                        for (i = 0; i < len; i++)
-                        {
-                            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, text[i]);
-                        }
-
-                        // printf("glyph count: %zu\n", count);
-                        // for (i = 0; i < count; i++)
-                        // {
-                        //     printf("gid#%d off: (%d, %d) adv: (%d, %d) idx: %d\n",
-                        //            glyphs[i].index,
-                        //            glyphs[i].x_offset,
-                        //            glyphs[i].y_offset,
-                        //            glyphs[i].x_advance,
-                        //            glyphs[i].y_advance,
-                        //            glyphs[i].cluster);
-                        // }
-                    }
-
-                    raqm_destroy(rq);
-                }
-            }
-
-            FT_Done_Face(face);
-        }
-
-        FT_Done_FreeType(library);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, text[i]);
     }
 }
 
-GLint attribute_coord;
-GLint uniform_tex;
-FT_Face face;
-FT_Library ft;
-GLuint vbo;
+GLint rt_attribute_coord;
+GLint rt_uniform_tex;
+GLuint rt_vbo;
 struct point
 {
     GLfloat x;
@@ -88,28 +31,21 @@ struct point
     GLfloat s;
     GLfloat t;
 };
-void render_text(const char *text, const char *fontfilename,
+void render_text(const char *text, FT_Face *face,
                  float x, float y, float sx, float sy)
 {
-    /* Initialize the FreeType2 library */
-    if (FT_Init_FreeType(&ft))
-    {
-        fprintf(stderr, "Could not init freetype library\n");
-        return;
-    }
-    glGenBuffers(1, &vbo);
-    if (FT_New_Face(ft, fontfilename, 0, &face))
-    {
-        fprintf(stderr, "Could not open font %s\n", fontfilename);
-        return;
-    }
-
     /* Create a texture that will be used to hold one "glyph" */
     GLuint tex;
+    size_t count, i;
+    raqm_glyph_t raqmGlyph;
+    FT_Bitmap bitmap;
+    FT_GlyphSlot glyp;
+    raqm_glyph_t *raqmGlyphs = getGlyphs(face, &count, text, "l", "km");
+
     glActiveTexture(GL_TEXTURE0);
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_2D, tex);
-    glUniform1i(uniform_tex, 0);
+    glUniform1i(rt_uniform_tex, 0);
 
     /* We require 1 byte alignment when uploading texture data */
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -122,16 +58,10 @@ void render_text(const char *text, const char *fontfilename,
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    /* Set up the VBO for our vertex data */
-    glEnableVertexAttribArray(attribute_coord);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer(attribute_coord, 4, GL_FLOAT, GL_FALSE, 0, 0);
-
-    size_t count, i;
-    raqm_glyph_t raqmGlyph;
-    raqm_glyph_t *raqmGlyphs = getGlyphs(&face, &count, text, "l", "km");
-    FT_Bitmap bitmap;
-    FT_GlyphSlot glyp;
+    /* Set up the rt_VBO for our vertex data */
+    glEnableVertexAttribArray(rt_attribute_coord);
+    glBindBuffer(GL_ARRAY_BUFFER, rt_vbo);
+    glVertexAttribPointer(rt_attribute_coord, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
     /* Loop through all characters */
     for (i = 0; i < count; i++)
@@ -165,6 +95,6 @@ void render_text(const char *text, const char *fontfilename,
         y += (glyp->advance.y >> 6) * sy;
     }
 
-    glDisableVertexAttribArray(attribute_coord);
+    glDisableVertexAttribArray(rt_attribute_coord);
     glDeleteTextures(1, &tex);
 }
