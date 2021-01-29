@@ -11,17 +11,15 @@ target_sources(main PUBLIC
     ${CURRENT_SOURCE_DIR}/utils.c
 )
 
-include_directories(libs/freetype2/include)
+include_directories(/usr/local/Cellar/freetype/2.10.2/include/freetype2)
 find_library(FREETYPE_LIBRARY
     freetype
-    PATH libs/freetype2/lib
 )
 target_link_libraries(main PUBLIC ${FREETYPE_LIBRARY})
 
-include_directories(libs/raqm/include)
+include_directories(/usr/local/Cellar/libraqm/0.7.1/include)
 find_library(RAQM_LIBRARY
     raqm
-    PATH libs/raqm/lib
 )
 target_link_libraries(main PUBLIC ${RAQM_LIBRARY})
 
