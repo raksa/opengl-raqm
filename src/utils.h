@@ -1,6 +1,3 @@
+#include "raqm.h"
 
-const char *getGlyphs(
-    const char *fontfile,
-    const char *text,
-    const char *direction,
-    const char *language);
+raqm_glyph_t *getGlyphs(FT_Face *face, size_t *count, const char *text, const char *direction, const char *language);

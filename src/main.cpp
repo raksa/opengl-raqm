@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 
    glutInit(&argc, argv);
    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-   glutInitWindowSize(500, 150);
+   glutInitWindowSize(700, 500);
    glutCreateWindow("GLUT bitmap font example");
    glClearColor(0.0, 0.0, 0.0, 1.0);
    glutDisplayFunc(display);

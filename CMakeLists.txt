@@ -23,4 +23,6 @@ find_library(RAQM_LIBRARY
 )
 target_link_libraries(main PUBLIC ${RAQM_LIBRARY})
 
+include_directories(/usr/local/Cellar/glm/0.9.9.8/include)
+
 set(CMAKE_CXX_FLAGS "-w -framework glut -framework opengl")

@@ -68,11 +68,18 @@ void output(int x, int y, char *string)
 
 void display(void)
 {
+  glClearColor(0.5, 0, 0.5, 1);
   glClear(GL_COLOR_BUFFER_BIT);
   output(0, 24, "This is written in a GLUT bitmap font.");
   output(100, 100, message);
   output(50, 145, "(positioned in pixels with upper-left origin)");
   renderKhmerText();
+
+  float sx = 2.0 / glutGet(GLUT_WINDOW_WIDTH);
+  float sy = 2.0 / glutGet(GLUT_WINDOW_HEIGHT);
+  render_text("សោះស្តី",
+              "/Users/raksa/Desktop/dev/opengl-raqm/assets/fonts/Battambang-Regular.ttf",
+              -1 + 8 * sx, 1 - 50 * sy, sx, sy);
   glutSwapBuffers();
 }
 
