@@ -1,12 +1,14 @@
 #include <iostream>
+#include <unistd.h>
 #include <GLUT/glut.h>
 
 #include "raqm.h"
 
 void renderKhmerText()
 {
-    std::string font_file = "./assets/fonts/Battambang-Regular.ttf";
-    std::string text = "hello សោះស្តី";
+    char buf[PATH_MAX];
+    std::string font_file = std::string(getcwd(buf, sizeof(buf))) + "/assets/fonts/Battambang-Regular.ttf";
+    std::string text = "Khmer text សោះស្តី";
     std::string direction = "r";
     std::string language = "km";
 
@@ -38,17 +40,24 @@ void renderKhmerText()
                         size_t count, i;
                         raqm_glyph_t *glyphs = raqm_get_glyphs(rq, &count);
 
-                        printf("glyph count: %zu\n", count);
-                        for (i = 0; i < count; i++)
+                        glRasterPos2f(10, 0);
+                        int len = text.length();
+                        for (i = 0; i < len; i++)
                         {
-                            printf("gid#%d off: (%d, %d) adv: (%d, %d) idx: %d\n",
-                                   glyphs[i].index,
-                                   glyphs[i].x_offset,
-                                   glyphs[i].y_offset,
-                                   glyphs[i].x_advance,
-                                   glyphs[i].y_advance,
-                                   glyphs[i].cluster);
+                            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, text[i]);
                         }
+
+                        // printf("glyph count: %zu\n", count);
+                        // for (i = 0; i < count; i++)
+                        // {
+                        //     printf("gid#%d off: (%d, %d) adv: (%d, %d) idx: %d\n",
+                        //            glyphs[i].index,
+                        //            glyphs[i].x_offset,
+                        //            glyphs[i].y_offset,
+                        //            glyphs[i].x_advance,
+                        //            glyphs[i].y_advance,
+                        //            glyphs[i].cluster);
+                        // }
                     }
 
                     raqm_destroy(rq);
