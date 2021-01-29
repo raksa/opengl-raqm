@@ -74,9 +74,8 @@ void display(void)
   // output(100, 100, message);
   // output(50, 145, "(positioned in pixels with upper-left origin)");
 
-  float sx = 2.0 / glutGet(GLUT_WINDOW_WIDTH);
-  float sy = 2.0 / glutGet(GLUT_WINDOW_HEIGHT);
-  draw_text("សោះស្តី", -1 + 8 * sx, 1 - 50 * sy, sx, sy);
+  apply_draw_text();
+
   glutSwapBuffers();
 }
 
