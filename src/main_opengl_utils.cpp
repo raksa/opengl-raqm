@@ -1,6 +1,7 @@
 // https://www.opengl.org/archives/resources/code/samples/glut_examples/examples/bitfont.c
 // https://github.com/themattinthehatt/tutorials/tree/master/opengl-tutorial/playground
 // https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Text_Rendering_01
+// https://gitlab.com/wikibooks-opengl/modern-tutorials
 #include <GLUT/glut.h>
 #include <string.h>
 
