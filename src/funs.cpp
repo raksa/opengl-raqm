@@ -9,7 +9,7 @@
 
 extern "C"
 {
-#include "utils.h"
+#include "raqm_utils.h"
 }
 
 FT_Library ft;
@@ -168,6 +168,7 @@ int init_resources()
 
   return 1;
 }
+
 void free_resources()
 {
   glDeleteProgram(program);

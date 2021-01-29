@@ -1,5 +1,5 @@
-#ifndef MAIN_OPENGL_UTILS
-#define MAIN_OPENGL_UTILS
+#ifndef FUNS
+#define FUNS
 
 void selectFont(int newfont);
 void selectMessage(int msg);

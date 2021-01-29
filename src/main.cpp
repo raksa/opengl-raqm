@@ -2,7 +2,7 @@
 #include <GLUT/glut.h>
 #include <string.h>
 
-#include "main_opengl_utils.h"
+#include "funs.h"
 
 int main(int argc, char **argv)
 {

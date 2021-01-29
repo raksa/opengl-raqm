@@ -6,7 +6,7 @@
 
 extern "C"
 {
-#include "utils.h"
+#include "raqm_utils.h"
 }
 
 void renderKhmerText()
