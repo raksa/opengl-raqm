@@ -10,7 +10,7 @@ extern "C"
 #include "raqm_utils.h"
 }
 
-FT_Library ft;
+FT_Library ftLibrary;
 FT_Face defaultFontFace;
 FT_Face enFontFace;
 GLuint program;
@@ -27,7 +27,7 @@ struct point
 };
 bool isKhmer = true;
 const char *kmFontfilename = "/Users/raksa/Desktop/dev/opengl-raqm/assets/fonts/Battambang-Regular.ttf";
-const char *emFontfilename = "/Users/raksa/Desktop/dev/opengl-raqm/assets/fonts/POPPINS-BOLD.TTF";
+const char *enFontfilename = "/Users/raksa/Desktop/dev/opengl-raqm/assets/fonts/POPPINS-BOLD.TTF";
 const char *vertShader = "/Users/raksa/Desktop/dev/opengl-raqm/assets/shader/vertex.glsl";
 const char *fragShader = "/Users/raksa/Desktop/dev/opengl-raqm/assets/shader/fragment.glsl";
 
@@ -35,15 +35,15 @@ int init_resources()
 {
 
   /* Initialize the FreeType2 library */
-  if (FT_Init_FreeType(&ft))
+  if (FT_Init_FreeType(&ftLibrary))
   {
     fprintf(stderr, "Could not init freetype library\n");
     return 0;
   }
 
   /* Load a font */
-  const char *fontfilename = isKhmer ? kmFontfilename : emFontfilename;
-  if (FT_New_Face(ft, fontfilename, 0, &defaultFontFace))
+  const char *fontfilename = isKhmer ? kmFontfilename : enFontfilename;
+  if (FT_New_Face(ftLibrary, fontfilename, 0, &defaultFontFace))
   {
     fprintf(stderr, "Could not open font %s\n", fontfilename);
     return 0;
@@ -87,6 +87,9 @@ int init_resources()
 
 void free_resources()
 {
+  FT_Done_FreeType(ftLibrary);
+  FT_Done_Face(defaultFontFace);
+  FT_Done_Face(enFontFace);
   glDeleteProgram(program);
 }
 
@@ -220,9 +223,9 @@ void apply_draw_text()
   draw_text(&defaultFontFace, isKhmer ? "សត្វកញ្ជ្រោងបៃតងថ្លាលោតលើឆ្កែខ្ជិល តន្ត្រី" : "The Transparent Green Fox Jumps Over The Lazy Dog",
             -1 + 18 * sx, 1 - 440 * sy, sx, sy);
 
-  if (FT_New_Face(ft, emFontfilename, 0, &enFontFace))
+  if (FT_New_Face(ftLibrary, enFontfilename, 0, &enFontFace))
   {
-    fprintf(stderr, "Could not open font %s\n", emFontfilename);
+    fprintf(stderr, "Could not open font %s\n", enFontfilename);
     return;
   }
   FT_Set_Pixel_Sizes(enFontFace, 0, 48);
