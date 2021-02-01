@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 project(test VERSION 0.1.0)
 
-find_package(PkgConfig)
-pkg_check_modules(MY_RAQM REQUIRED IMPORTED_TARGET raqm)
-
 set(CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_executable(main ${CURRENT_SOURCE_DIR}/main.cpp)
@@ -16,6 +13,8 @@ target_sources(main PUBLIC
     ${CURRENT_SOURCE_DIR}/raqm_utils.c
 )
 
+find_package(PkgConfig)
+pkg_check_modules(MY_RAQM REQUIRED IMPORTED_TARGET raqm)
 target_link_libraries(main PUBLIC
         PkgConfig::MY_RAQM)
 
