@@ -8,8 +8,9 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/myfuns)
 # cmake . && cmake --build . && cmake --install . --prefix "./dist"
 install(TARGETS main DESTINATION bin)
 
-target_link_libraries(main PRIVATE myfuns1)
 target_include_directories(main PRIVATE ${PROJECT_SOURCE_DIR}/myfuns)
+target_link_libraries(main PRIVATE myfuns1)
+target_link_libraries(main PRIVATE myfuns2)
 
 # cmake . && cmake --build . && cmake --install . --prefix "./dist" && ctest -C Debug -VV
 enable_testing()
