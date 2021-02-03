@@ -1,6 +1,6 @@
 #include <iostream>
 
-int say(std::string str)
+void say(std::string str)
 {
     std::cout << str << std::endl;
 }
