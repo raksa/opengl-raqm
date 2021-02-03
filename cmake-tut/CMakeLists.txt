@@ -10,6 +10,11 @@ add_executable(main main.cpp)
 add_subdirectory(${PROJECT_SOURCE_DIR}/myfuns)
 add_subdirectory(${PROJECT_SOURCE_DIR}/mylib)
 
+# add compile definitions
+target_compile_definitions(mylib PRIVATE "SHOULD_NOT_SAY")
+# global defined
+add_definitions(-DMAIN_SHOULD_NOT_SAY)
+
 # cmake . && cmake --build . && cmake --install . --prefix "./dist"
 install(TARGETS main DESTINATION bin)
 
