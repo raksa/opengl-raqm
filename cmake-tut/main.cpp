@@ -5,6 +5,6 @@
 int main(int argc, char const *argv[])
 {
     greeting = "Hello World";
-    std::cout << "Hello World" << std::endl;
+    std::cout << greeting << std::endl;
     return 0;
 }

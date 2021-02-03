@@ -5,6 +5,6 @@ add_executable(main main.cpp)
 # cmake . && cmake --build . && cmake --install . --prefix "./dist"
 install(TARGETS main DESTINATION bin)
 
-# cmake . && ctest -C Debug -VV
+# cmake . && cmake --build . && cmake --install . --prefix "./dist" && ctest -C Debug -VV
 enable_testing()
 add_test(NAME Runs COMMAND man)
