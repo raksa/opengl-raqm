@@ -7,3 +7,6 @@
 /main
 /dist
 /install_manifest.txt
+/_CPack_Packages
+/CPack*
+/cmake_tut*

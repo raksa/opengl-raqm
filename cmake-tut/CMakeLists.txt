@@ -40,3 +40,11 @@ do_test(main "" "main add|mult")
 do_test(main add "add\\(2, 3\\) = 5")
 do_test(main mult "mult\\(2, 3\\) = 6")
 do_test(main sub "Invalid operation")
+
+
+# cmake . && cpack -G ZIP -C Debug
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${Tutorial_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${Tutorial_VERSION_MINOR}")
+include(CPack)
