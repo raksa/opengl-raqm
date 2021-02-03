@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "main.h"
+#include "mylib.h"
 
 int main(int argc, char const *argv[])
 {
