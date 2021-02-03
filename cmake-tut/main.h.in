@@ -5,8 +5,8 @@
 #include "myfuns1.h"
 #include "myfuns2.h"
 
-#define cmake_tut_VERSION_MAJOR 0
-#define cmake_tut_VERSION_MINOR 1
+#define cmake_tut_VERSION_MAJOR @cmake_tut_VERSION_MAJOR@
+#define cmake_tut_VERSION_MINOR @cmake_tut_VERSION_MINOR@
 
 std::string usageMessage = "main add|mult";
 
