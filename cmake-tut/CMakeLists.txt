@@ -1,5 +1,7 @@
+# https://cmake.org/cmake/help/latest/guide/tutorial/index.html#build-and-test
 # cmake . && cmake --build .
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
+
 project(cmake_tut VERSION 0.1)
 configure_file(main.h.in main.h)
 
@@ -7,6 +9,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 add_executable(main main.cpp)
 
+add_subdirectory(${PROJECT_SOURCE_DIR}/gen-table)
 add_subdirectory(${PROJECT_SOURCE_DIR}/myfuns)
 add_subdirectory(${PROJECT_SOURCE_DIR}/mylib)
 
