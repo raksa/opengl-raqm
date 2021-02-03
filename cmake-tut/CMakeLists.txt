@@ -1,6 +1,8 @@
 # cmake . && cmake --build .
 cmake_minimum_required(VERSION 3.0)
-project(Test VERSION 0.0.1)
+project(cmake-tut VERSION 0.0.1)
+set(CMAKE_BUILD_TYPE Debug)
+
 add_executable(main main.cpp)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/myfuns)
@@ -14,4 +16,14 @@ target_link_libraries(main PRIVATE myfuns2)
 
 # cmake . && cmake --build . && cmake --install . --prefix "./dist" && ctest -C Debug -VV
 enable_testing()
-add_test(NAME Runs COMMAND main)
+function(do_test target arg result)
+    add_test(NAME Runs-with-${arg} COMMAND ${target} ${arg})
+    set_tests_properties(Runs-with-${arg}
+      PROPERTIES PASS_REGULAR_EXPRESSION ${result}
+      )
+endfunction(do_test)
+
+do_test(main "" "main add|mult")
+do_test(main add "add\\(2, 3\\) = 5")
+do_test(main mult "mult\\(2, 3\\) = 6")
+do_test(main sub "Invalid operation")

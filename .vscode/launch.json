@@ -14,6 +14,19 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "MIMode": "lldb"
+        },
+        {
+            "name": "(lldb) Launch cmake-tut-main",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cmake-tut/dist/bin/main",
+            "args": [
+                "add"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/cmake-tut",
+            "environment": [],
+            "MIMode": "lldb"
         }
     ]
 }
