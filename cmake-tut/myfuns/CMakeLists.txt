@@ -1,3 +1,3 @@
 # add_subdirectory(myfuns)
-add_library(myfuns myfuns.cpp)
-install(TARGETS myfuns DESTINATION lib)
+add_library(myfuns1 myfuns1.cpp)
+install(TARGETS myfuns1 DESTINATION lib)
